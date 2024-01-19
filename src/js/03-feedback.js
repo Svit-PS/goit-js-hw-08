@@ -1,13 +1,8 @@
 import throttle from 'lodash.throttle';
 
 const formEl = document.querySelector('.feedback-form');
-formEl.addEventListener('submit', onSubmitForm);
-
-const emailEl = document.querySelector('input');
-emailEl.addEventListener('input', throttle(updateStorege, 500));
-
+const emailEl = formEl.querySelector('input');
 const messageEl = formEl.querySelector('textarea');
-messageEl.addEventListener('input', throttle(updateStorege, 500));
 
 const KEY_FORM = 'feedback-form-state';
 const current_Storege = JSON.parse(localStorage.getItem(KEY_FORM)) ?? {
@@ -17,6 +12,9 @@ const current_Storege = JSON.parse(localStorage.getItem(KEY_FORM)) ?? {
 
 emailEl.value = current_Storege.email;
 messageEl.value = current_Storege.message;
+
+formEl.addEventListener('submit', onSubmitForm);
+formEl.addEventListener('input', throttle(updateStorege, 500));
 
 function updateStorege() {
   current_Storege.email = emailEl.value;
