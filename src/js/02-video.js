@@ -5,7 +5,7 @@ const playerEl = document.querySelector('#vimeo-player');
 const KEY_TIME = 'videoplayer-current-time';
 const current_Time = JSON.parse(localStorage.getItem(KEY_TIME)) ?? 0;
 
-player = new Vimeo.Player('vimeo-player');
+const player = new Player('vimeo-player');
 player.setCurrentTime(current_Time);
 
 player.on('timeupdate', throttle(saveCurrentTime, 1000));
